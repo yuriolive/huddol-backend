@@ -18,7 +18,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('name');
             $table->string('category');
             $table->unsignedTinyInteger('price');
-            $table->unsignedTinyInteger('rating');
+            $table->float('rating');
             $table->unsignedTinyInteger('processTime');
             $table->timestamps();
         });
