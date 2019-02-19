@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Order;
+use App\Http\Resources\OrderResource;
+use App\Http\Requests\OrderStoreRequest;
+
 
 class OrderController extends Controller
 {
@@ -13,7 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return OrderResource::collection(Order::all());
     }
 
     /**
@@ -22,9 +26,9 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderStoreRequest $request)
     {
-        //
+        $validated = $request->validated();
     }
 
     /**
@@ -35,7 +39,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        return new OrderResource(Order::find($id));
     }
 
     /**
@@ -45,9 +49,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OrderStoreRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
     }
 
     /**
