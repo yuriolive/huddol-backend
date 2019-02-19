@@ -55,10 +55,18 @@ class OrderController extends Controller
             } else {
                 // valid data
                 DB::transaction(function () use ($restaurant_id, $order_encoded) {
-                    $order_id = DB::table('orders')->insertGetId(['restaurant_id' => $restaurant_id]);
-                    DB::table('order_products')->insert(array_map(function ($product) use ($order_id)
+                    $date_time = \Carbon\Carbon::now()->toDateTimeString();
+                    $order_id = DB::table('orders')->insertGetId([
+                        'restaurant_id' => $restaurant_id,
+                        'created_at' => $date_time ,
+                        'updated_at' => $date_time 
+                    ]);
+
+                    DB::table('order_products')->insert(array_map(function ($product) use ($order_id, $date_time)
                     {
                         $product['order_id'] = $order_id;
+                        $product['created_at'] = $date_time;
+                        $product['updated_at'] = $date_time;
                         return $product;
                     }, $order_encoded['products']));
                 }, 5);

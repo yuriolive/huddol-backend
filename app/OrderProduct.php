@@ -8,6 +8,8 @@ class OrderProduct extends Model
 {
 	public $timestamps = true;
 
+	protected $fillable = ['order_id', 'product_id', 'quantity'];
+
     public function order()
     {
         return $this->belongsTo(Order::class);
