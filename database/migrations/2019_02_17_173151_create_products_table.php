@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('restaurant_id');
             $table->float('price');
             $table->timestamps();
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });
     }
 
