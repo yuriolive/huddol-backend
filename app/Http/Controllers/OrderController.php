@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\OrderProduct;
 use App\Http\Resources\OrderResource;
+use App\Http\Resources\OrderMenuResource;
 
 class OrderController extends Controller
 {
@@ -85,7 +86,7 @@ class OrderController extends Controller
     public function show($id)
     {
         // TODO
-        return new OrderResource(Order::find($id));
+        return new OrderMenuResource(Order::find($id));
     }
 
     /**
