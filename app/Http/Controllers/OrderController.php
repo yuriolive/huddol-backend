@@ -37,9 +37,9 @@ class OrderController extends Controller
 
         $validator1 = Validator::make($order_encoded, [
             'restaurant_id' => 'required|integer|exists:restaurants,id',
-            'products' => 'required|array|min:1',
-            'products.*.product_id' => 'required|integer|distinct',
-            'products.*.quantity' => 'required|integer|gte:1',
+            'menu' => 'required|array|min:1',
+            'menu.*.product_id' => 'required|integer|distinct',
+            'menu.*.quantity' => 'required|integer|gte:1',
         ]);
      
         if ($validator1->fails()) {
@@ -48,7 +48,7 @@ class OrderController extends Controller
             $restaurant_id = $order_encoded['restaurant_id'];
 
             $validator2 = Validator::make($order_encoded, [
-                'products.*.product_id' => 'exists:products,id,restaurant_id,' . $restaurant_id
+                'menu.*.product_id' => 'exists:products,id,restaurant_id,' . $restaurant_id
             ]);
 
             if ($validator2->fails()) {
