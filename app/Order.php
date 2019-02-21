@@ -10,6 +10,11 @@ class Order extends Model
 
 	protected $fillable = ['restaurant_id'];
 
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class);
+    }	
+
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class);

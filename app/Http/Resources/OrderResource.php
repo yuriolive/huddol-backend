@@ -16,7 +16,7 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'restaurant_id' => $this->restaurant_id,
+            'restaurant' => $this->restaurant,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
