@@ -43,7 +43,7 @@ class OrderController extends Controller
         ]);
      
         if ($validator1->fails()) {
-            return response()->json(['errors' => $validator1->errors()]);
+            return response()->json(['errors' => $validator1->errors()])->setStatusCode(400);
         } else {
             $restaurant_id = $order_encoded['restaurant_id'];
 
@@ -52,7 +52,7 @@ class OrderController extends Controller
             ]);
 
             if ($validator2->fails()) {
-                return response()->json(['errors' => $validator2->errors()]);
+                return response()->json(['errors' => $validator2->errors()])->setStatusCode(400);
             } else {
                 // valid data
                 DB::transaction(function () use ($restaurant_id, $order_encoded) {
@@ -69,12 +69,12 @@ class OrderController extends Controller
                         $product['created_at'] = $date_time;
                         $product['updated_at'] = $date_time;
                         return $product;
-                    }, $order_encoded['products']));
+                    }, $order_encoded['menu']));
                 }, 5);
             }
         }
 
-        return response()->json(['message' => 'Successfully submitted the order']);
+        return response()->json(null, 204);
     }
 
     /**
