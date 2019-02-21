@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 // CORS
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: accept, content-type, x-xsrf-token, x-csrf-token');
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
